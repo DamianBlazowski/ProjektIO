@@ -3,7 +3,9 @@
 
 using namespace std;
 
-string login, haslo;
+string login, haslo, imie, nazwisko, pesel;
+string loginKier = "DBBBDC2115";
+string hasloKier = "DBD123";
 
 int GetInput()
 {
@@ -23,10 +25,30 @@ void MenuGlowne()
     cout << "Wybór: ";
 }
 
+void MenuLogowanie()
+{
+    cout << "--------------------" << endl;
+    cout << "| Zaloguj się jako |" << endl;
+    cout << "--------------------" << endl;
+    cout << "1 - Klient\n";
+    cout << "2 - Kierownik\n";
+    cout << "3 - Wyjdź\n";
+    cout << "Wybór: ";
+}
+
 void Rejestracja()
 {
     string wpisywanie;
     cout << "Tworzenie konta" << endl;
+    cout << "Imie" << endl;
+    cin >> wpisywanie;
+    imie = wpisywanie;
+    cout << "Nazwisko" << endl;
+    cin >> wpisywanie;
+    nazwisko = wpisywanie;
+    cout << "NR Pesel" << endl;
+    cin >> wpisywanie;
+    pesel = wpisywanie;
     cout << "Podaj login" << endl;
     cin >> wpisywanie;
     login = wpisywanie;
@@ -38,21 +60,53 @@ void Rejestracja()
 
 void Logowanie()
 {
-    string wpisywanie;
+    string wpisywanieL, wpisywanieH;
     cout << "Podaj login" << endl;
-    cin >> wpisywanie;
+    cin >> wpisywanieL;
     cout << "Podaj haslo" << endl;
-    cin >> wpisywanie;
-    if (wpisywanie != haslo)
+    cin >> wpisywanieH;
+    if (wpisywanieH == hasloKier)
     {
-        cout << "Błęsny login lub hasło" << endl;
+        cout << "Zalogowano Kierownika" << endl;
+        //główny kod kierownika
+    }
+    if (wpisywanieH != haslo || wpisywanieL != login)
+    {
+        cout << "Błędny login lub hasło" << endl;
         Logowanie();
     }
     else
     {
         cout << "Zalogowano" << endl;
-        MenuGlowne();
+        //główny kod klienta
     }
+}
+
+void logowanieWybor()
+{
+    int wybor = 0;
+
+    do
+    {
+        system("clear");
+        MenuLogowanie();
+        wybor = GetInput();
+        switch (wybor)
+        {
+        case 1:
+            Logowanie();
+            break;
+        case 2:
+            Logowanie();
+            break;
+        case 3:
+            break;
+
+        default:
+            break;
+        }
+    } while (wybor != 3);
+    system("PAUSE");
 }
 
 int main(int argc, char *argv[])
@@ -61,7 +115,7 @@ int main(int argc, char *argv[])
 
     do
     {
-        system("cls");
+        system("clear");
         MenuGlowne();
         wybor = GetInput();
         switch (wybor)
@@ -70,7 +124,7 @@ int main(int argc, char *argv[])
             Rejestracja();
             break;
         case 2:
-            Logowanie();
+            logowanieWybor();
             break;
         case 3:
             cout << "Naura!";
@@ -80,6 +134,6 @@ int main(int argc, char *argv[])
             break;
         }
     } while (wybor != 3);
-    system("PAUSE");
+    system("pause");
     return EXIT_SUCCESS;
 }
