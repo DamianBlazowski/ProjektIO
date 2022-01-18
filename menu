@@ -1,0 +1,85 @@
+#include <cstdlib>
+#include <iostream>
+
+using namespace std;
+
+string login, haslo;
+
+int GetInput()
+{
+    int wybor;
+    cin >> wybor;
+    return wybor;
+}
+
+void MenuGlowne()
+{
+    cout << "----------------------------" << endl;
+    cout << "| Wypożyczalnia samochodów |" << endl;
+    cout << "----------------------------" << endl;
+    cout << "1 - Rejestracja\n";
+    cout << "2 - Logowanie\n";
+    cout << "3 - Wyjdź\n";
+    cout << "Wybór: ";
+}
+
+void Rejestracja()
+{
+    string wpisywanie;
+    cout << "Tworzenie konta" << endl;
+    cout << "Podaj login" << endl;
+    cin >> wpisywanie;
+    login = wpisywanie;
+    cout << "Podaj hasło" << endl;
+    cin >> wpisywanie;
+    haslo = wpisywanie;
+    MenuGlowne();
+}
+
+void Logowanie()
+{
+    string wpisywanie;
+    cout << "Podaj login" << endl;
+    cin >> wpisywanie;
+    cout << "Podaj haslo" << endl;
+    cin >> wpisywanie;
+    if (wpisywanie != haslo)
+    {
+        cout << "Błęsny login lub hasło" << endl;
+        Logowanie();
+    }
+    else
+    {
+        cout << "Zalogowano" << endl;
+        MenuGlowne();
+    }
+}
+
+int main(int argc, char *argv[])
+{
+    int wybor = 0;
+
+    do
+    {
+        system("cls");
+        MenuGlowne();
+        wybor = GetInput();
+        switch (wybor)
+        {
+        case 1:
+            Rejestracja();
+            break;
+        case 2:
+            Logowanie();
+            break;
+        case 3:
+            cout << "Naura!";
+            break;
+
+        default:
+            break;
+        }
+    } while (wybor != 3);
+    system("PAUSE");
+    return EXIT_SUCCESS;
+}
