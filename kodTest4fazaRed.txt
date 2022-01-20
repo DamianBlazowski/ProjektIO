@@ -1,0 +1,92 @@
+#include <gtest/gtest.h>
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+string wpisane;
+
+class ModelSamochodu
+{
+    string Marka;
+    string Model;
+    int Rocznik;
+    int IloscDni;
+    float CenaZaDzien = 0.0;
+    bool Dostepnosc = true;
+
+public:
+    ModelSamochodu(string Marka, string Model, int Rocznik, float CenaZaDzien, bool Dostepnosc)
+    {
+        this->Marka = Marka;
+        this->Model = Model;
+        this->Rocznik = Rocznik;
+        this->CenaZaDzien = CenaZaDzien;
+        this->Dostepnosc = Dostepnosc;
+    }
+
+    string zamiana(string nMarka)
+    {
+        Marka = nMarka;
+        return Marka;
+    }
+
+    string wypisanie()
+    {
+        return Marka;
+    }
+
+    ModelSamochodu()
+    {
+    }
+
+    ~ModelSamochodu()
+    {
+    }
+
+    float get_cena() const
+    {
+        return CenaZaDzien;
+    }
+};
+
+ModelSamochodu tablicaSamochodow[] = {
+    ModelSamochodu("Ford-Mustang", "GT", 2020, 2000.0, true), //dostępne samochody
+    ModelSamochodu("Mercedes", "C", 2020, 1500.0, true),
+    ModelSamochodu("Mercedes", "E", 2020, 1000.0, true),
+    ModelSamochodu("Mazda", "MX-5", 2020, 1670.0, true),
+    ModelSamochodu("BMW", "8", 2020, 2450.0, true),
+    ModelSamochodu("BMW", "2", 2020, 1930.0, true),
+    ModelSamochodu("Mercedes", "S", 2020, 2100.0, true),
+    ModelSamochodu("Porsche", "911", 2020, 2750.0, true),
+    ModelSamochodu("BMW", "4", 2020, 1870.0, true),
+    ModelSamochodu("Porsche", "718", 2020, 1600.0, true),
+    ModelSamochodu(),
+    ModelSamochodu(),
+    ModelSamochodu()};
+
+TEST(testgettera, nr1)
+{
+    EXPECT_NE(tablicaSamochodow[0].get_cena(), tablicaSamochodow[1].get_cena());
+}
+
+TEST(testfunkcji, nr2)
+{
+    EXPECT_EQ(tablicaSamochodow[0].zamiana(wpisane), "Ferrari");
+}
+
+TEST(testwypisywania, nr3)
+{
+    EXPECT_EQ(tablicaSamochodow[2].wypisanie(), "Mercedes");
+}
+
+TEST(testsettera, nr4)
+{
+    EXPECT_LT(tablicaSamochodow[1].get_Iloscdni(wpisane1), tablicaSamochodow[2].get_Iloscdni(wpisane2))
+}
+
+int main(int argc, char *argv[])
+{
+    cin >> wpisane;
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
+}
